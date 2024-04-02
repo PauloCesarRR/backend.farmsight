@@ -4,8 +4,9 @@ import lombok.AllArgsConstructor;
 import org.farmsight.security.domain.User;
 import org.farmsight.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
 
@@ -19,8 +20,8 @@ public class UserService {
         repository.save(user);
     }
 
-    public User getById(UUID id) throws ChangeSetPersister.NotFoundException {
-        return repository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new);
+    public User getById(UUID id) {
+        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
 }
