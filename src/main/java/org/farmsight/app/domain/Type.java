@@ -1,4 +1,4 @@
-package org.farmsight.security.domain;
+package org.farmsight.app.domain;
 
 public enum Type {
     PRODUCER,

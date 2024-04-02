@@ -1,4 +1,4 @@
-package org.farmsight.security;
+package org.farmsight.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,17 +1,15 @@
-package org.farmsight.security.domain;
+package org.farmsight.app.domain;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@Builder
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;

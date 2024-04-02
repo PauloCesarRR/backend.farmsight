@@ -1,4 +1,4 @@
-package org.farmsight.security;
+package org.farmsight.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
