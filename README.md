@@ -1,7 +1,7 @@
 ## Projeto Java com Spring e Gradle
 
 ## Integrantes
-- Paulo César - RM99615
+- Paulo César
 - Saulo Gomes
 - Matheus Valero Colim
 - Diego Borges
@@ -17,9 +17,9 @@
 - **Corpo da Requisição:** JSON contendo os dados do usuário.
   ```json
   {
-    "name": "Nome do Usuário",
+    "username": "Nome do Usuário",
     "email": "email@dominio.com",
-    "age": 25
+    "type": "PRODUCER"
   }
   ```
 - **Resposta de Sucesso:** Retorna o usuário criado com status 200 OK.
@@ -43,13 +43,13 @@ Para executar este projeto em sua máquina local, siga as instruções abaixo:
 2. Clone este repositório para o seu ambiente local:
 
    ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+   git clone https://github.com/PauloCesarRR/backend.farmsight.git
    ```
 
 3. Navegue até o diretório raiz do projeto:
 
    ```bash
-   cd nome-do-repositorio
+   cd backend.farmsight
    ```
 
 4. Execute o seguinte comando para construir o projeto:
@@ -65,7 +65,7 @@ Para executar este projeto em sua máquina local, siga as instruções abaixo:
    ```
 
 6. Uma vez que o projeto esteja em execução, os endpoints estarão disponíveis em `http://localhost:8080`.
-
+repositorio
 Certifique-se de ter configurado corretamente as credenciais do banco de dados ou qualquer outra configuração necessária para que a aplicação funcione corretamente em seu ambiente local.
 
 Para qualquer dúvida ou problema, sinta-se à vontade para abrir uma nova issue neste repositório.
