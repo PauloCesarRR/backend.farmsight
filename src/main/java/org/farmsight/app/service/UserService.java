@@ -5,6 +5,7 @@ import org.farmsight.app.domain.User;
 import org.farmsight.app.dtos.UserDTO;
 import org.farmsight.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,16 @@ public class UserService {
 
     public User create(UserDTO dto) {
         User user = User.builder()
-                .name(dto.name())
+                .username(dto.username())
                 .email(dto.email())
                 .type(dto.type())
                 .build();
+
+        if(repository.findById(user.getId()).isPresent()){
+            throw new DataIntegrityViolationException("Usuário já cadastrado");
+        }
+
+
         return repository.save(user);
     }
 
