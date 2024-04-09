@@ -1,4 +1,4 @@
-package org.farmsight.app.infra.requests;
+package org.farmsight.app.infra.filters;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
