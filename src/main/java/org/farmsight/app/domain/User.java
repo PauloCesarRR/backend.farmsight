@@ -7,18 +7,20 @@ import lombok.*;
 
 import java.util.UUID;
 
+@Entity(name = "tb_users")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.UUID)
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @Column(nullable = false)
+    @NotBlank
     private String username;
-    @Column(nullable = false)
     @Email
     private String email;
-    @NotBlank
     @Enumerated(EnumType.STRING)
     private Type type;
 }

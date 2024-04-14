@@ -14,10 +14,9 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserService {
-
-    private final UserRepository repository;
+    @Autowired
+    private UserRepository repository;
 
     public User create(UserDTO dto) {
         User user = User.builder()
@@ -25,11 +24,6 @@ public class UserService {
                 .email(dto.email())
                 .type(dto.type())
                 .build();
-
-        if(repository.findById(user.getId()).isPresent()){
-            throw new DataIntegrityViolationException("Usuário já cadastrado");
-        }
-
 
         return repository.save(user);
     }

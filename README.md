@@ -1,4 +1,4 @@
-## Projeto Java com Spring e Gradle
+## Projeto FarmSight para controle de usuários
 
 ## Integrantes
 - Paulo César

@@ -1,9 +1,7 @@
 package org.farmsight.app.domain;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -11,7 +9,9 @@ import java.util.UUID;
 @Builder
 @Getter
 @Setter
-@Entity
+@Entity(name = "tb_plantations")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Plantations {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

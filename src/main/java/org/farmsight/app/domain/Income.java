@@ -1,25 +1,27 @@
 package org.farmsight.app.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity
 @Builder
-@Setter
 @Getter
+@Setter
+@Entity(name = "tb_farm_income")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Income {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private LocalDate date;
+    @Column(nullable = false)
+    private LocalDateTime dateTime;
+    @Column(nullable = false)
     private BigDecimal value;
+    @ManyToOne
+    @Column(nullable = false)
+    private Farm farm;
 }
