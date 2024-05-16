@@ -1,10 +1,7 @@
 package org.farmsight.app.domain;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.UUID;
@@ -19,6 +16,14 @@ public class PlantationStrategy {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String strategyName;
-    private String description;
+    @ManyToOne
+    @MapsId("plantationId")
+    @JoinColumn(name = "plantation_id")
+    Plantation plantation;
+
+    @ManyToOne
+    @MapsId("strategyID")
+    @JoinColumn(name = "strategy_id")
+    Strategy strategy;
+
 }

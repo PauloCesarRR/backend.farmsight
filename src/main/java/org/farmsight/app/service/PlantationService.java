@@ -1,32 +1,34 @@
 package org.farmsight.app.service;
 
-import org.farmsight.app.domain.User;
-import org.farmsight.app.dtos.UserDTO;
-import org.farmsight.app.repository.UserRepository;
+import org.farmsight.app.domain.Farm;
+import org.farmsight.app.domain.Plantation;
+import org.farmsight.app.repository.PlantationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
 public class PlantationService {
     @Autowired
-    private UserRepository repository;
+    private PlantationRepository repository;
 
-    public User create(UserDTO dto) {
-        User user = User.builder()
-                .username(dto.username())
-                .email(dto.email())
-                .type(dto.type())
-                .build();
+    @Autowired
+    private FarmService farmService;
 
-        return repository.save(user);
+    public Plantation create(Plantation plantation) {
+        return repository.save(plantation);
     }
 
-    public User findById(UUID id) {
+    public Plantation findById(UUID id) {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
+    public List<Plantation> findAllByFarm(UUID farmId) {
+        Farm farm = farmService.findById(farmId);
+        return repository.findAllByFarm(farm);
+    }
 }

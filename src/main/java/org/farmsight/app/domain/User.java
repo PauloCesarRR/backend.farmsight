@@ -1,6 +1,5 @@
 package org.farmsight.app.domain;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -10,7 +9,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity(name = "tb_users")
+@Entity(name = "tb_user")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,10 +26,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Type type;
     @NotNull
+    @Column(nullable = false)
     private LocalDateTime createdAt;
     @NotNull
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
-    @Nullable
+    @Column(nullable = true)
     private LocalDateTime deletedAt;
 
 }
