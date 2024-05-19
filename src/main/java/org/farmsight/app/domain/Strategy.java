@@ -18,6 +18,4 @@ public class Strategy {
     private UUID id;
     private String strategyName;
     private String description;
-    @OneToMany(mappedBy = "strategy")
-    private Set<PlantationStrategy> plantationStrategy;
 }

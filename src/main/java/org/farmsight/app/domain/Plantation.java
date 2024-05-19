@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -19,8 +20,8 @@ public class Plantation {
     private UUID id;
     private LocalDate date;
     private String plantType;
-    @OneToMany(mappedBy = "plantation")
-    private Set<PlantationStrategy> plantationStrategy;
+    @ManyToOne
+    private Strategy strategy;
     @ManyToOne
     private Farm farm;
 }

@@ -32,5 +32,4 @@ public class FarmController {
         return ResponseEntity.ok(service.findAllByUser(UUID.fromString(userId)));
     }
 
-
 }
