@@ -43,4 +43,10 @@ public class PlantationController {
         return ResponseEntity.ok(service.findAllByStrategy(UUID.fromString(strategyId)));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletePlantationById(@PathVariable String id) {
+        service.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
 }

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ public class PlantationService {
     private StrategyService strategyService;
 
     public Plantation create(Plantation plantation) {
+        plantation.setDate(LocalDate.now());
         return repository.save(plantation);
     }
 
@@ -44,5 +46,10 @@ public class PlantationService {
     public List<Plantation> findAllByStrategy(UUID strategyId) {
         Strategy strategy = strategyService.findById(strategyId);
         return repository.findAllByStrategy(strategy);
+    }
+
+    public void delete(String id) {
+        Plantation plantation = findById(UUID.fromString(id));
+        repository.delete(plantation);
     }
 }

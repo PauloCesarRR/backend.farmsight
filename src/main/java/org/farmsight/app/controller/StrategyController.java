@@ -28,7 +28,7 @@ public class StrategyController {
         return ResponseEntity.ok(service.findById(UUID.fromString(id)));
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<Strategy>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
