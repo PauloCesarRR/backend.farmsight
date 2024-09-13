@@ -9,7 +9,9 @@ import org.farmsight.app.domain.Type;
 
 public record UserDTO(
         @Size(min = 1, max = 255)
-        String username,
+        String firstName,
+        @Size(min = 1, max = 255)
+        String lastName,
         @Email
         String email,
         @Enumerated(EnumType.STRING)

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.farmsight.app.domain.User;
 import org.farmsight.app.dtos.UserDTO;
 import org.farmsight.app.infra.exceptions.UserAlreadyExistsException;
+import org.farmsight.app.infra.exceptions.UserNotFoundException;
 import org.farmsight.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -24,14 +25,15 @@ public class UserService {
 
     public User create(UserDTO dto) {
 
-        boolean userExists = findByEmail(dto.email()).isPresent();
+        boolean userExists = repository.findByEmail(dto.email()).isPresent();
         if (userExists) {
             throw new UserAlreadyExistsException("Email already exists");
         }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(dto.password());
         User user = User.builder()
-                .username(dto.username())
+                .firstName(dto.firstName())
+                .lastName(dto.lastName())
                 .email(dto.email())
                 .password(encryptedPassword)
                 .type(dto.type())
@@ -44,11 +46,11 @@ public class UserService {
     }
 
     public User findById(UUID id) {
-        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return repository.findById(id).orElseThrow(() -> new UserNotFoundException("User Not Found"));
     }
 
-    public Optional<User> findByEmail(String email) {
-        return repository.findByEmail(email);
+    public User findByEmail(String email) {
+        return repository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User Not Found"));
     }
 
 

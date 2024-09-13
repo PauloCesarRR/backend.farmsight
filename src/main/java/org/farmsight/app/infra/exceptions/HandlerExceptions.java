@@ -1,10 +1,7 @@
 package org.farmsight.app.infra.exceptions;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.farmsight.app.dtos.ExceptionDTO;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,7 +30,7 @@ public class HandlerExceptions {
 
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(UserAlreadyExistsException.class)
-    public ExceptionDTO threatDuplicateEntry(UserAlreadyExistsException exception){
+    public ExceptionDTO threatDuplicateEntry(UserAlreadyExistsException exception) {
         return new ExceptionDTO(exception.getMessage(), 409);
     }
 
