@@ -68,6 +68,6 @@ public class AuthController {
     })
     public ResponseEntity<?> register(@RequestBody @Valid UserDTO data) {
         this.service.create(data);
-        return ResponseEntity.created(null).build();
+        return ResponseEntity.ok().build();
     }
 }
