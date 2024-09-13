@@ -1,8 +1,10 @@
 package org.farmsight.app.controller;
 
-import org.farmsight.app.domain.Farm;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.farmsight.app.domain.Plantation;
-import org.farmsight.app.service.FarmService;
 import org.farmsight.app.service.PlantationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,31 +21,91 @@ public class PlantationController {
     private PlantationService service;
 
     @PostMapping
+    @Operation(summary = "Create a Plantation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Internal Server Error",
+                    content = @Content),
+            @ApiResponse(responseCode = "401", description = "Not Authorized ",
+                    content = @Content),
+            @ApiResponse(responseCode = "400", description = "Invalid arguments in request ",
+                    content = @Content),
+            @ApiResponse(responseCode = "200", description = "Ok",
+                    content = @Content)
+    })
     public ResponseEntity<Plantation> create(@RequestBody Plantation plantation) {
         return ResponseEntity.ok(service.create(plantation));
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get a Plantation By Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Internal Server Error",
+                    content = @Content),
+            @ApiResponse(responseCode = "401", description = "Not Authorized ",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not Found",
+                    content = @Content),
+            @ApiResponse(responseCode = "200", description = "Ok",
+                    content = @Content)
+    })
     public ResponseEntity<Plantation> findById(@PathVariable String id) {
         return ResponseEntity.ok(service.findById(UUID.fromString(id)));
     }
 
     @GetMapping
+    @Operation(summary = "Get all Plantations")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Internal Server Error",
+                    content = @Content),
+            @ApiResponse(responseCode = "401", description = "Not Authorized ",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not Found",
+                    content = @Content),
+            @ApiResponse(responseCode = "200", description = "Ok",
+                    content = @Content)
+    })
     public ResponseEntity<List<Plantation>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/farm/{farmId}")
+    @Operation(summary = "Get Plantations By FarmId")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Internal Server Error",
+                    content = @Content),
+            @ApiResponse(responseCode = "401", description = "Not Authorized ",
+                    content = @Content),
+            @ApiResponse(responseCode = "200", description = "Ok",
+                    content = @Content)
+    })
     public ResponseEntity<List<Plantation>> findAllByFarm(@PathVariable String farmId) {
         return ResponseEntity.ok(service.findAllByFarm(UUID.fromString(farmId)));
     }
 
     @GetMapping("/strategy/{strategyId}")
+    @Operation(summary = "Get Plantations By StrategyId")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Internal Server Error",
+                    content = @Content),
+            @ApiResponse(responseCode = "401", description = "Not Authorized ",
+                    content = @Content),
+            @ApiResponse(responseCode = "200", description = "Ok",
+                    content = @Content)
+    })
     public ResponseEntity<List<Plantation>> findAllByStrategy(@PathVariable String strategyId) {
         return ResponseEntity.ok(service.findAllByStrategy(UUID.fromString(strategyId)));
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete Plantation")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Internal Server Error",
+                    content = @Content),
+            @ApiResponse(responseCode = "401", description = "Not Authorized ",
+                    content = @Content),
+            @ApiResponse(responseCode = "200", description = "Ok",
+                    content = @Content)
+    })
     public ResponseEntity<?> deletePlantationById(@PathVariable String id) {
         service.delete(id);
         return ResponseEntity.ok().build();

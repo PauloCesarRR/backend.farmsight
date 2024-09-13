@@ -1,8 +1,10 @@
 package org.farmsight.app.controller;
 
-import org.farmsight.app.domain.Farm;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.farmsight.app.domain.Strategy;
-import org.farmsight.app.service.FarmService;
 import org.farmsight.app.service.StrategyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +21,47 @@ public class StrategyController {
     private StrategyService service;
 
     @PostMapping
+    @Operation(summary = "Create a Strategy")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Internal Server Error",
+                    content = @Content),
+            @ApiResponse(responseCode = "401", description = "Not Authorized",
+                    content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad Request",
+                    content = @Content),
+            @ApiResponse(responseCode = "200", description = "Ok",
+                    content = @Content)
+    })
     public ResponseEntity<Strategy> create(@RequestBody Strategy strategy) {
         return ResponseEntity.ok(service.create(strategy));
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get Plantations By FarmId")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Internal Server Error",
+                    content = @Content),
+            @ApiResponse(responseCode = "401", description = "Not Authorized",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not Found",
+                    content = @Content),
+            @ApiResponse(responseCode = "200", description = "Ok",
+                    content = @Content)
+    })
     public ResponseEntity<Strategy> findById(@PathVariable String id) {
         return ResponseEntity.ok(service.findById(UUID.fromString(id)));
     }
 
     @GetMapping
+    @Operation(summary = "Find All Strategies")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Internal Server Error",
+                    content = @Content),
+            @ApiResponse(responseCode = "401", description = "Not Authorized",
+                    content = @Content),
+            @ApiResponse(responseCode = "200", description = "Ok",
+                    content = @Content)
+    })
     public ResponseEntity<List<Strategy>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
