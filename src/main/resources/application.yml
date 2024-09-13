@@ -12,8 +12,26 @@ spring:
       path: /h2-console
 api:
   security:
-    # https://kubernetes.io/docs/concepts/configuration/secret/
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: mysecre
+    secret: sa-secret
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, openapi, swagger-ui
+
+  endpoint:
+    health:
+      show-details: always
+    info:
+      git:
+        enabled: true
+        mode: full
+
+springdoc:
+  show-actuator: true
+  swagger-ui:
+    path: /swagger-ui
+    enabled: true
+  api-docs:
+    enabled: true
