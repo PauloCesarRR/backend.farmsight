@@ -2,6 +2,7 @@ package org.farmsight.app.service;
 
 import org.farmsight.app.domain.Farm;
 import org.farmsight.app.domain.User;
+import org.farmsight.app.infra.exceptions.FarmNotFoundException;
 import org.farmsight.app.repository.FarmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class FarmService {
     }
 
     public Farm findById(UUID id) {
-        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return repository.findById(id).orElseThrow(() -> new FarmNotFoundException("Farm not found"));
     }
 
     public List<Farm> findAllByUser(UUID userId) {

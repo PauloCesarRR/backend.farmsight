@@ -3,6 +3,7 @@ package org.farmsight.app.service;
 import org.farmsight.app.domain.Farm;
 import org.farmsight.app.domain.Plantation;
 import org.farmsight.app.domain.Strategy;
+import org.farmsight.app.infra.exceptions.PlantationNotFoundException;
 import org.farmsight.app.repository.PlantationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class PlantationService {
     }
 
     public Plantation findById(UUID id) {
-        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return repository.findById(id).orElseThrow(() -> new PlantationNotFoundException("Plantation not found"));
     }
 
 
