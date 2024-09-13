@@ -3,6 +3,7 @@ package org.farmsight.app.service;
 import lombok.AllArgsConstructor;
 import org.farmsight.app.domain.User;
 import org.farmsight.app.dtos.UserDTO;
+import org.farmsight.app.infra.exceptions.UserAlreadyExistsException;
 import org.farmsight.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -21,6 +23,12 @@ public class UserService {
     private UserRepository repository;
 
     public User create(UserDTO dto) {
+
+        boolean userExists = findByEmail(dto.email()).isPresent();
+        if (userExists) {
+            throw new UserAlreadyExistsException("Email already exists");
+        }
+
         String encryptedPassword = new BCryptPasswordEncoder().encode(dto.password());
         User user = User.builder()
                 .username(dto.username())
@@ -39,7 +47,7 @@ public class UserService {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    public User findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return repository.findByEmail(email);
     }
 

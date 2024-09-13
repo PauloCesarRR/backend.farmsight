@@ -31,11 +31,10 @@ public class HandlerExceptions {
     }
 
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ExceptionDTO threatDuplicateEntry(DataIntegrityViolationException exception){
-
-        return new ExceptionDTO("Usuário já cadastrado", 400);
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ExceptionDTO threatDuplicateEntry(UserAlreadyExistsException exception){
+        return new ExceptionDTO(exception.getMessage(), 409);
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)

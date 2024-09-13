@@ -17,11 +17,6 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @PostMapping
-    public ResponseEntity<User> create(@RequestBody UserDTO dto) {
-        return ResponseEntity.ok(service.create(dto));
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable String id) {
         return ResponseEntity.ok(service.findById(UUID.fromString(id)));
