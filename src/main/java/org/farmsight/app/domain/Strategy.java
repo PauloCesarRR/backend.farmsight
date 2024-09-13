@@ -10,6 +10,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity(name = "tb_strategy")
+@Table(name = "tb_strategy")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Strategy {

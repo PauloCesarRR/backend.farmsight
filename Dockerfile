@@ -1,10 +1,10 @@
-FROM eclipse-temurin:17-jdk-alpine as builder
+FROM gradle:jdk17 as builder
 
 WORKDIR /app
 
 COPY . .
 
-RUN  sh ./gradlew bootJar
+RUN gradle --no-daemon clean bootJar
 
 FROM eclipse-temurin:17-jre-alpine as runner
 ARG JARFILE=*.jar

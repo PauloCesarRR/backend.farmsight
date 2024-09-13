@@ -15,7 +15,6 @@ public record UserDTO(
         @Email
         String email,
         @Enumerated(EnumType.STRING)
-        @NotBlank
         Type type,
         @NotBlank
         String password
