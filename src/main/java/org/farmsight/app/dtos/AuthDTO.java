@@ -1,4 +1,6 @@
 package org.farmsight.app.dtos;
 
-public record AuthDTO (String email, String senha){
+import jakarta.validation.constraints.NotBlank;
+
+public record AuthDTO(@NotBlank String email, @NotBlank String senha) {
 }

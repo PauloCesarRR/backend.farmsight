@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -37,6 +38,18 @@ public class UserController {
     })
     public ResponseEntity<User> findById(@PathVariable String id) {
         return ResponseEntity.ok(service.findById(UUID.fromString(id)));
+    }
+
+    @GetMapping
+    @Operation(summary = "Get All Users")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "401", description = "Not Authorized",
+                    content = @Content),
+            @ApiResponse(responseCode = "200", description = "Ok",
+                    content = @Content)
+    })
+    public ResponseEntity<List<User>> findAll() {
+        return ResponseEntity.ok(service.findAll());
     }
 
 }

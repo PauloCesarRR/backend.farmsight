@@ -9,8 +9,10 @@ import org.farmsight.app.domain.Type;
 
 public record UserDTO(
         @Size(min = 1, max = 255)
+        @NotBlank
         String firstName,
         @Size(min = 1, max = 255)
+        @NotBlank
         String lastName,
         @Email
         String email,

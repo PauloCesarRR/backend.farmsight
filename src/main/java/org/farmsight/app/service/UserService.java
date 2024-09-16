@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -43,6 +44,10 @@ public class UserService {
                 .build();
 
         return repository.save(user);
+    }
+
+    public List<User> findAll() {
+        return repository.findAll();
     }
 
     public User findById(UUID id) {
