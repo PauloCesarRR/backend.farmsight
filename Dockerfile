@@ -1,12 +1,12 @@
-FROM gradle:jdk17 as builder
+FROM eclipse-temurin:21-jdk-alpine as builder
 
 WORKDIR /app
 
 COPY . .
 
-RUN gradle --no-daemon clean bootJar
+RUN  sh ./gradlew bootJar
 
-FROM eclipse-temurin:17-jre-alpine as runner
+FROM eclipse-temurin:21-jre-alpine as runner
 ARG JARFILE=*.jar
 COPY --from=builder /app/build/libs/${JARFILE} application.jar
 
