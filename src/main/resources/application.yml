@@ -1,4 +1,10 @@
 spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbitmq
+    password: rabbitmq
+
   application:
     name: app
   datasource:
@@ -15,10 +21,15 @@ spring:
     locations: db/migration/
     enabled: true
     baseline-on-migrate: true
+  ai:
+    openai:
+      api-key: ${OPEN_AI_API_KEY}
 
 api:
   security:
     secret: sa-secret
+
+
 
 management:
   endpoints:
