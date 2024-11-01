@@ -9,10 +9,7 @@ import jakarta.validation.Valid;
 import org.farmsight.app.ai.ChatService;
 import org.farmsight.app.dtos.ChatDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/chat")
@@ -33,7 +30,7 @@ public class ChatController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ChatDTO message(@RequestBody @Valid ChatDTO chatDTO) {
+    public ChatDTO message(@RequestHeader(name = "Authorization") String AuthToken, @RequestBody @Valid ChatDTO chatDTO) {
         var message = service.sendToAi(chatDTO.message());
         return new ChatDTO(message);
     }

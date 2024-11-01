@@ -32,7 +32,7 @@ public class StrategyController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ResponseEntity<Strategy> create(@RequestBody Strategy strategy) {
+    public ResponseEntity<Strategy> create(@RequestHeader(name = "Authorization") String AuthToken, @RequestBody Strategy strategy) {
         return ResponseEntity.ok(service.create(strategy));
     }
 
@@ -48,7 +48,7 @@ public class StrategyController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ResponseEntity<Strategy> findById(@PathVariable String id) {
+    public ResponseEntity<Strategy> findById(@RequestHeader(name = "Authorization") String AuthToken, @PathVariable String id) {
         return ResponseEntity.ok(service.findById(UUID.fromString(id)));
     }
 
@@ -62,7 +62,7 @@ public class StrategyController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ResponseEntity<List<Strategy>> findAll() {
+    public ResponseEntity<List<Strategy>> findAll(@RequestHeader(name = "Authorization") String AuthToken) {
         return ResponseEntity.ok(service.findAll());
     }
 

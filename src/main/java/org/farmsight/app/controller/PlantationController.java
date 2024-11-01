@@ -32,7 +32,7 @@ public class PlantationController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ResponseEntity<Plantation> create(@RequestBody Plantation plantation) {
+    public ResponseEntity<Plantation> create(@RequestHeader(name = "Authorization") String AuthToken, @RequestBody Plantation plantation) {
         return ResponseEntity.ok(service.create(plantation));
     }
 
@@ -48,7 +48,7 @@ public class PlantationController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ResponseEntity<Plantation> findById(@PathVariable String id) {
+    public ResponseEntity<Plantation> findById(@RequestHeader(name = "Authorization") String AuthToken, @PathVariable String id) {
         return ResponseEntity.ok(service.findById(UUID.fromString(id)));
     }
 
@@ -64,7 +64,7 @@ public class PlantationController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ResponseEntity<List<Plantation>> findAll() {
+    public ResponseEntity<List<Plantation>> findAll(@RequestHeader(name = "Authorization") String AuthToken) {
         return ResponseEntity.ok(service.findAll());
     }
 
@@ -78,7 +78,7 @@ public class PlantationController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ResponseEntity<List<Plantation>> findAllByFarm(@PathVariable String farmId) {
+    public ResponseEntity<List<Plantation>> findAllByFarm(@RequestHeader(name = "Authorization") String AuthToken, @PathVariable String farmId) {
         return ResponseEntity.ok(service.findAllByFarm(UUID.fromString(farmId)));
     }
 
@@ -92,7 +92,7 @@ public class PlantationController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ResponseEntity<List<Plantation>> findAllByStrategy(@PathVariable String strategyId) {
+    public ResponseEntity<List<Plantation>> findAllByStrategy(@RequestHeader(name = "Authorization") String AuthToken, @PathVariable String strategyId) {
         return ResponseEntity.ok(service.findAllByStrategy(UUID.fromString(strategyId)));
     }
 
@@ -106,7 +106,7 @@ public class PlantationController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ResponseEntity<?> deletePlantationById(@PathVariable String id) {
+    public ResponseEntity<?> deletePlantationById(@RequestHeader(name = "Authorization") String AuthToken, @PathVariable String id) {
         service.delete(id);
         return ResponseEntity.ok().build();
     }

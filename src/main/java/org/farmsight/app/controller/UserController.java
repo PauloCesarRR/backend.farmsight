@@ -8,10 +8,8 @@ import org.farmsight.app.domain.User;
 import org.farmsight.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,7 +34,7 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ResponseEntity<User> findById(@PathVariable String id) {
+    public ResponseEntity<User> findById(@Header(name = "Authorization") String AuthToken, @PathVariable String id) {
         return ResponseEntity.ok(service.findById(UUID.fromString(id)));
     }
 
@@ -48,7 +46,7 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<User>> findAll(@RequestHeader(name = "Authorization") String AuthToken) {
         return ResponseEntity.ok(service.findAll());
     }
 

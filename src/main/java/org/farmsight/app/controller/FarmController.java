@@ -33,7 +33,7 @@ public class FarmController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ResponseEntity<Farm> create(@RequestBody Farm farm) {
+    public ResponseEntity<Farm> create(@RequestHeader(name = "Authorization") String AuthToken, @RequestBody Farm farm) {
         return ResponseEntity.ok(service.create(farm));
     }
 
@@ -49,7 +49,7 @@ public class FarmController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ResponseEntity<Farm> findById(@PathVariable String id) {
+    public ResponseEntity<Farm> findById(@RequestHeader(name = "Authorization") String AuthToken, @PathVariable String id) {
         return ResponseEntity.ok(service.findById(UUID.fromString(id)));
     }
 
@@ -63,7 +63,7 @@ public class FarmController {
             @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content)
     })
-    public ResponseEntity<List<Farm>> findAllByUser(@PathVariable String userId) {
+    public ResponseEntity<List<Farm>> findAllByUser(@RequestHeader(name = "Authorization") String AuthToken, @PathVariable String userId) {
         return ResponseEntity.ok(service.findAllByUser(UUID.fromString(userId)));
     }
 
